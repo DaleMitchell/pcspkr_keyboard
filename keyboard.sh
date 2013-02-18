@@ -1,6 +1,5 @@
 #! /bin/bash
 
-# notes defined here, except integers
 export q=55
 export w=57
 export e=59
@@ -23,13 +22,13 @@ tone () {
     gpio -g pwm 18 "$(( period/2 ))"
     gpio pwm-ms
   fi
-    echo -e ""
 }
 
 while :
 do
-    read -n 1 key
+    read -r -n 1 key
     case "$key" in
+      # TAB ) note=54;;   #not working!
         q) note=$q;;
         2) note=56;;
         w) note=$w;;
@@ -43,9 +42,15 @@ do
         u) note=$u;;
         8) note=66;;
         i) note=$i;;
+        9) note=68;;
         o) note=$o;;
+        0) note=70;;
         p) note=$p;;
+        "-") note=73;;
         "[") note=72;;
+        "=") note=75;;
+        "]") note=74;;
+        '\') note=76;;
         a) note=0;;
     esac
     tone $note
